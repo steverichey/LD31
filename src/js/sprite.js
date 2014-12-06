@@ -98,7 +98,7 @@ var GameButton = function(x, y, asset) {
       .start();
   };
   
-  this.mousedown = function(data) {
+  this.mousedown = this.touchstart = function(data) {
     if (scaletween) scaletween.stop();
     scaletween = new TWEEN.Tween({targetscale: this.scale.x})
       .to({targetscale: 1.5}, 125)
@@ -110,7 +110,7 @@ var GameButton = function(x, y, asset) {
     if (this.onclicked) this.onclicked();
   };
   
-  this.mouseup = function(data) {
+  this.mouseup = this.touchend = this.mouseupoutside = this.touchendoutside = function(data) {
     if (scaletween) scaletween.stop();
     scaletween = new TWEEN.Tween({targetscale: this.scale.x})
       .to({targetscale: 1.0}, 1000)
