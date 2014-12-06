@@ -63,11 +63,12 @@ var GameButton = function(x, y, asset) {
   GameSprite.call(this, x, y, asset);
   var self = this;
   this.interactive = true;
-  var tween = null;
+  var rotatetween = null;
+  var scaletween = null;
   
   this.mouseover = function(data) {
-    if (tween) tween.stop();
-    tween = new TWEEN.Tween({targetrotation: this.rotation})
+    if (rotatetween) rotatetween.stop();
+    rotatetween = new TWEEN.Tween({targetrotation: this.rotation})
       .to({targetrotation: 0.25}, 250)
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(function() {
@@ -77,8 +78,8 @@ var GameButton = function(x, y, asset) {
   };
   
   this.mouseout = function(data) {
-    if (tween) tween.stop();
-    tween = new TWEEN.Tween({targetrotation: this.rotation})
+    if (rotatetween) rotatetween.stop();
+    rotatetween = new TWEEN.Tween({targetrotation: this.rotation})
       .to({targetrotation: 0}, 250)
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(function() {
@@ -88,8 +89,7 @@ var GameButton = function(x, y, asset) {
   };
   
   this.mousedown = function(data) {
-    if (tween) tween.stop();
-    tween = new TWEEN.Tween({targetscale: this.scale.x})
+    if (scaletween) scaletween.stop();
       .to({targetscale: 1.5}, 125)
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(function() {
@@ -99,8 +99,8 @@ var GameButton = function(x, y, asset) {
   };
   
   this.mouseup = function(data) {
-    if (tween) tween.stop();
-    tween = new TWEEN.Tween({targetscale: this.scale.x})
+    if (scaletween) scaletween.stop();
+    scaletween = new TWEEN.Tween({targetscale: this.scale.x})
       .to({targetscale: 1.0}, 1000)
       .easing(TWEEN.Easing.Bounce.Out)
       .onUpdate(function() {
