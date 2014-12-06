@@ -1,4 +1,4 @@
-/*global PIXI, document, window, console, requestAnimationFrame, GameSprite, GameButton, Game, setTimeout, SnowGuy*/
+/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, Game, setTimeout, SnowGuy*/
 
 var renderer, stage;
 
