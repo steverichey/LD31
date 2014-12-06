@@ -17,7 +17,7 @@ function init() {
   
   snowguy = new SnowGuy();
   
-  var buttons = new GameButtons([64, 192, 320, 448, 576, 704], 'button-left', true);
+  var buttons = new GameButtons(6, 'button-left', GameButtons.Options.LEFT_SIDE);
   
   buttons.get(0).onclicked = function() {
     snowguy.changeEyes('contacts-green');
