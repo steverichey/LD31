@@ -1,6 +1,6 @@
 /*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy*/
 
-var renderer, stage, snowguy;
+var renderer, stage, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
 
 function init() {
   Game.updateSize();
@@ -17,20 +17,31 @@ function init() {
   
   snowguy = new SnowGuy();
   
-  var buttons = new GameButtons(6, 'button-left', GameButtons.Options.LEFT_SIDE);
+  leftbuttons   = new GameButtons(5, 'button-left', GameButtons.Options.LEFT_SIDE);
+  rightbuttons  = null;
+  centerbuttons = null;
   
-  buttons.get(0).onclicked = function() {
-    snowguy.changeEyes('contacts-green');
-  };
+  function createright() {
+    rightbuttons = null;
+    rightbuttons = new GameButtons(5, 'button-left', GameButtons.Options.RIGHT_SIDE);
+  }
   
-  buttons.get(1).onclicked = function() {
-    snowguy.changeEyes('snowman-eyes');
-  };
+  leftbuttons.setAllOnClicked(function() {
+    if (rightbuttons !== null) {
+      rightbuttons.hide(function() {
+        createright();
+      });
+    } else {
+      createright();
+    }
+  });
   
   var i = 0;
   
   function animate() {
     TWEEN.update();
+    
+    snowguy.lookAt(mouse.x, mouse.y);
     
     for (i = 0; i < Game.children.length; i++) {
       Game.children[i].update();
@@ -39,6 +50,11 @@ function init() {
     renderer.render(stage);
     requestAnimationFrame(animate);
   }
+  
+  stage.mousemove = function(data) {
+    mouse.x = data.global.x;
+    mouse.y = data.global.y;
+  };
   
   requestAnimationFrame(animate);
 }

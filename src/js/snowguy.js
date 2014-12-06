@@ -1,6 +1,11 @@
 /*global GameSprite, Game, TWEEN*/
 
 var SnowGuy = function() {
+  this.MIN_EYE_X = 502;
+  this.MAX_EYE_X = 522;
+  this.MIN_EYE_Y = 240;
+  this.MAX_EYE_Y = 250;
+  
   this.butt = new GameSprite(512, 600, 'snowman-booty');
   Game.add(this.butt);
   
@@ -67,4 +72,9 @@ SnowGuy.prototype.changeMouth = function(asset) {
 
 SnowGuy.prototype.changeHair = function(asset) {
   this.hair.changeTexture(asset);
+};
+
+SnowGuy.prototype.lookAt = function(x, y) {
+  this.eyes.x = this.MIN_EYE_X + (this.MAX_EYE_X - this.MIN_EYE_X) * (x / Game.width);
+  this.eyes.y = this.MIN_EYE_Y + (this.MAX_EYE_Y - this.MIN_EYE_Y) * (y / Game.height);
 };
