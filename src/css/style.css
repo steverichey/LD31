@@ -9,9 +9,9 @@ body {
 canvas { 
   background-color: #664444;
   position: absolute;
-  /*top: 50%;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);*/
-  height: 100%;
-  width: 100%;
+  transform: translate(-50%, -50%);
+  width: 1024px;
+  height: 768px;
 }

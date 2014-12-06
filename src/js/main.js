@@ -1,25 +1,29 @@
-/*global PIXI, document, window, console, requestAnimationFrame, GameSprite, Game, setTimeout*/
+/*global PIXI, document, window, console, requestAnimationFrame, GameSprite, GameButton, Game, setTimeout, SnowGuy*/
 
-var renderer, stage, height, width, sprite;
+var renderer, stage, sprite;
 
 function init() {
   Game.updateSize();
-  renderer = new PIXI.WebGLRenderer(width, height);
+  renderer = new PIXI.WebGLRenderer(Game.width, Game.height);
   document.body.appendChild(renderer.view);
   
-  stage = new PIXI.Stage();
+  stage = new PIXI.Stage(0x000000, true);
   
-  var head = new GameSprite(0.5, 0.25, 'snowman-head');
-  stage.addChild(head);
+  var bg = new GameSprite(512, 384, 'bg');
+  Game.add(bg);
   
-  sprite = new GameSprite(0.5, 0.5, 'snowman-tummy');
-  stage.addChild(sprite);
+  var button = new GameButton(48, 48, 'button');
+  Game.add(button);
   
-  var butt = new GameSprite(0.5, 0.75, 'snowman-booty');
-  stage.addChild(butt);
+  var snowguy = new SnowGuy();
+  
+  var i = 0;
   
   function animate() {
-    //sprite.rotation += 0.01;
+    for (i = 0; i < Game.children.length; i++) {
+      Game.children[i].update();
+    }
+    
     renderer.render(stage);
     requestAnimationFrame(animate);
   }
