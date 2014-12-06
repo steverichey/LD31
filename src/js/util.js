@@ -50,3 +50,7 @@ Game.random.float = function(min, max) {
 Game.random.int = function(min, max) {
   return Math.round(Game.random.float(min, max));
 };
+
+Game.random.chance = function(likelihood) {
+  return (likelihood > Game.random.float(0, 100));
+};
