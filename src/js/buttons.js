@@ -1,6 +1,7 @@
 /*global GameButton, Game, TWEEN, PIXI, setTimeout*/
 
-var GameButtons = function(amount, asset, type) {
+var GameButtons = function(assetArray, type) {
+  var amount = assetArray.length;
   this.buttonsArray = [];
   var self = this;
   this.type = type;
@@ -25,8 +26,8 @@ var GameButtons = function(amount, asset, type) {
       case GameButtons.Options.CENTER_BOTTOM:
         deltaX      = 128;
         initialX    = 196;
+        finalDeltaX = 2 * (Game.width - 128 * 2) / amount;
         finalX      = 196;
-        finalDeltaX = 128;
         finalY      = Game.height - 256;
         finalDeltaY = 128;
         initialY    = Game.height + 64;
@@ -40,9 +41,11 @@ var GameButtons = function(amount, asset, type) {
   var i = 0;
   
   for (i = 0; i < amount; i++) {
-    var button = new GameButton(initialX + i * deltaX, initialY + i * deltaY, asset, self);
+    var button = new GameButton(initialX + i * deltaX, initialY + i * deltaY, self);
     this.buttonsArray.push(button);
     Game.add(button);
+    button.addTopGraphic(assetArray[i]);
+    button.index = i;
   }
   
   new TWEEN.Tween({positionX: this.buttonsArray[0].x, positionY: this.buttonsArray[0].y})
@@ -71,7 +74,7 @@ GameButtons.prototype.hide = function(callback) {
   var finalX      = 0;
   var finalY      = 0;
   var self = this;
-  var duration = 1000;
+  var duration = self.type === GameButtons.Options.CENTER_BOTTOM ? 125 : 1000;
   
   switch(this.type) {
       case GameButtons.Options.RIGHT_SIDE:
@@ -92,7 +95,7 @@ GameButtons.prototype.hide = function(callback) {
     .easing(TWEEN.Easing.Cubic.Out)
     .onUpdate(function() {
       for (i = 0; i < self.buttonsArray.length; i++) {
-        if (this.type !== GameButtons.Options.CENTER_BOTTOM) {
+        if (self.type !== GameButtons.Options.CENTER_BOTTOM) {
           self.buttonsArray[i].x = this.positionX;
         } else {
           self.buttonsArray[i].y = this.positionY;
