@@ -12,11 +12,16 @@ function init() {
   var bg = new GameSprite(512, 384, 'bg');
   Game.add(bg);
   
-  var buttoneyes = new GameButton(48, 48, 'button');
+  snowguy = new SnowGuy();
+  
+  var buttoneyes = new GameButton(128, 128, 'button-left');
   Game.add(buttoneyes);
   
-  var snowguy = new SnowGuy();
+  buttoneyes.onclicked = function() {
+    snowguy.changeEyes('contacts-green');
+  };
   
+  // used in the update loop
   var i = 0;
   
   function animate() {
