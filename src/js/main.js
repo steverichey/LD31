@@ -1,13 +1,13 @@
 /*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy*/
 
-var renderer, stage, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
+var renderer, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
 
 function init() {
   Game.updateSize();
   renderer = new PIXI.WebGLRenderer(Game.width, Game.height);
   document.body.appendChild(renderer.view);
   
-  stage = new PIXI.Stage(0x000000, true);
+  Game.stage = new PIXI.Stage(0x000000, true);
   
   var bg = new GameSprite(512, 384, 'background');
   Game.add(bg);
@@ -17,22 +17,68 @@ function init() {
   
   snowguy = new SnowGuy();
   
-  leftbuttons   = new GameButtons(5, 'button-left', GameButtons.Options.LEFT_SIDE);
+  leftbuttons   = new GameButtons(['snowman-eyes', 'snowman-nose', 'snowman-mouth', 'stand', 'stand'], GameButtons.Options.LEFT_SIDE);
   rightbuttons  = null;
   centerbuttons = null;
   
-  function createright() {
+  function createright(index) {
     rightbuttons = null;
-    rightbuttons = new GameButtons(5, 'button-left', GameButtons.Options.RIGHT_SIDE);
+    
+    var options = [];
+    
+    switch (index) {
+      case 0: options = ['snowman-eyes', 'stand', 'stand', 'stand', 'stand'];
+        break;
+      default: options = ['stand', 'stand', 'stand', 'stand', 'stand'];
+        break;
+    }
+    
+    rightbuttons = new GameButtons(options, GameButtons.Options.RIGHT_SIDE);
+    
+    rightbuttons.setAllOnClicked(function(index) {
+      if (centerbuttons !== null) {
+        centerbuttons.hide(function() {
+          createCenter(index);
+        });
+      } else {
+        createCenter(index);
+      }
+    });
   }
   
-  leftbuttons.setAllOnClicked(function() {
+  function createCenter(index) {
+    centerbuttons = null;
+    
+    var options = [];
+    
+    switch (index) {
+      case 0: options = ['snowman-eyes', 'contacts-big-blue', 'contacts-big-brown', 'contacts-big-purple', 'contacts-blue-green', 'contacts-blue', 'contacts-brown', 'contacts-gray', 'contacts-red', 'contacts-violet'];
+        break;
+      default: options = ['stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand'];
+        break;
+    }
+    
+    centerbuttons = new GameButtons(options, GameButtons.Options.CENTER_BOTTOM);
+    
+    centerbuttons.setAllOnClicked(function(subindex) {
+      switch (index) {
+        case 0: // we picked eyes
+          snowguy.changeEyes(centerbuttons.get(subindex).graphicName);
+          break;
+        default:
+          snowguy.changeMouth('stand');
+          break;
+      }
+    });
+  }
+  
+  leftbuttons.setAllOnClicked(function(index) {
     if (rightbuttons !== null) {
       rightbuttons.hide(function() {
-        createright();
+        createright(index);
       });
     } else {
-      createright();
+      createright(index);
     }
   });
   
@@ -47,11 +93,11 @@ function init() {
       Game.children[i].update();
     }
     
-    renderer.render(stage);
+    renderer.render(Game.stage);
     requestAnimationFrame(animate);
   }
   
-  stage.mousemove = function(data) {
+  Game.stage.mousemove = function(data) {
     mouse.x = data.global.x;
     mouse.y = data.global.y;
   };
@@ -62,8 +108,8 @@ function init() {
 function onResize() {
   Game.updateSize();
   renderer.resize(Game.width, Game.height);
-  stage.width  = Game.width;
-  stage.height = Game.height;
+  Game.stage.width  = Game.width;
+  Game.stage.height = Game.height;
 }
 
 window.addEventListener('load', init);
