@@ -39,6 +39,15 @@ Game.add = function(child) {
   Game.children.push(child);
 };
 
+Game.remove = function(child) {
+  stage.removeChild(child);
+  var i = Game.children.indexOf(child);
+  
+  if (i >= 0) {
+    Game.children.splice(i, 1);
+  }
+};
+
 Game.random = {};
 
 Game.random.float = function(min, max) {
