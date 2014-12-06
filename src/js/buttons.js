@@ -4,15 +4,18 @@ var GameButtons = function(amount, asset, type) {
   this.buttonsArray = [];
   var self = this;
   this.type = type;
+  this.blocked = true;
+  var duration = 1000;
+  this.block(duration);
   
-  var initialX    =   0;
-  var finalX      =   0;
-  var deltaY      = 128;
-  var initialY    =  64;
-  var deltaX      =   0;
-  var finalDeltaX =   0;
-  var finalY      =   0;
-  var finalDeltaY =   0;
+  var initialX    = 0;
+  var finalX      = 0;
+  var deltaY      = Game.height / amount;
+  var initialY    = deltaY / 2;
+  var deltaX      = 0;
+  var finalDeltaX = 0;
+  var finalY      = 0;
+  var finalDeltaY = 0;
   
   switch (type) {
       case GameButtons.Options.RIGHT_SIDE:
@@ -37,13 +40,13 @@ var GameButtons = function(amount, asset, type) {
   var i = 0;
   
   for (i = 0; i < amount; i++) {
-    var button = new GameButton(initialX + i * deltaX, initialY + i * deltaY, asset);
+    var button = new GameButton(initialX + i * deltaX, initialY + i * deltaY, asset, self);
     this.buttonsArray.push(button);
     Game.add(button);
   }
   
   new TWEEN.Tween({positionX: this.buttonsArray[0].x, positionY: this.buttonsArray[0].y})
-    .to({positionX: finalX, positionY: finalY}, 1500)
+    .to({positionX: finalX, positionY: finalY}, duration)
     .easing(TWEEN.Easing.Elastic.Out)
     .onUpdate(function() {
       for (i = 0; i < self.buttonsArray.length; i++) {
@@ -68,7 +71,7 @@ GameButtons.prototype.hide = function(callback) {
   var finalX      = 0;
   var finalY      = 0;
   var self = this;
-  var duration = 2500;
+  var duration = 1000;
   
   switch(this.type) {
       case GameButtons.Options.RIGHT_SIDE:
@@ -86,7 +89,7 @@ GameButtons.prototype.hide = function(callback) {
   
   new TWEEN.Tween({positionX: this.buttonsArray[0].x, positionY: this.buttonsArray[0].y})
     .to({positionX: finalX, positionY: finalY}, duration)
-    .easing(TWEEN.Easing.Elastic.Out)
+    .easing(TWEEN.Easing.Cubic.Out)
     .onUpdate(function() {
       for (i = 0; i < self.buttonsArray.length; i++) {
         if (this.type !== GameButtons.Options.CENTER_BOTTOM) {
@@ -109,6 +112,14 @@ GameButtons.prototype.setAllOnClicked = function(callback) {
   this.buttonsArray.forEach(function(button, index) {
     button.onclicked = callback;
   });
+};
+
+GameButtons.prototype.block = function(duration) {
+  this.blocked = true;
+  var self = this;
+  setTimeout(function() {
+    self.blocked = false;
+  }, duration);
 };
 
 GameButtons.Options = {
