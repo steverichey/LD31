@@ -1,7 +1,7 @@
-/*global GameSprite, TWEEN*/
+/*global GameSprite, TWEEN, Game, PIXI*/
 
-var GameButton = function(x, y, asset, parent) {
-  GameSprite.call(this, x, y, asset);
+var GameButton = function(x, y, parent) {
+  GameSprite.call(this, x, y, 'button-left');
   var self = this;
   this.interactive = true;
   this.index = 0;
@@ -9,6 +9,9 @@ var GameButton = function(x, y, asset, parent) {
   var rotatetween = null;
   var scaletween = null;
   this.onclicked = function(){};
+  this.innerGraphic = null;
+  this.innerRatio = 0;
+  this.graphicName = '';
   
   this.mouseover = function(data) {
     if (rotatetween) rotatetween.stop();
@@ -46,7 +49,7 @@ var GameButton = function(x, y, asset, parent) {
         return;
       }
       
-      this.onclicked();
+      this.onclicked(this.index);
     }
   };
   
@@ -64,3 +67,29 @@ var GameButton = function(x, y, asset, parent) {
 
 GameButton.prototype = Object.create(GameSprite.prototype);
 GameButton.prototype.constructor = GameButton;
+
+GameButton.prototype.addTopGraphic = function(asset) {
+  var rect = new PIXI.Graphics();
+  rect.drawRect(this.x, this.y, this.width, this.height);
+  
+  this.innerGraphic = new GameSprite(this.x, this.y, asset);
+  Game.stage.addChild(this.innerGraphic);
+  
+  this.innerRatio = this.innerGraphic.width / this.innerGraphic.height;
+  this.graphicName = asset;
+};
+
+GameButton.prototype.update = function() {
+  if (this.innerGraphic !== null) {
+    this.innerGraphic.x = this.x;
+    this.innerGraphic.y = this.y;
+    this.innerGraphic.rotation = this.rotation;
+    this.innerGraphic.scale.set(this.scale.x, this.scale.y);
+    
+    if (this.innerGraphic.width > this.width) {
+      this.innerRatio = this.innerGraphic.width / this.innerGraphic.height;
+      this.innerGraphic.width = this.width * 0.8;
+      this.innerGraphic.height = this.innerGraphic.width / this.innerRatio;
+    }
+  }
+};
