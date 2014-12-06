@@ -1,6 +1,6 @@
 /*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, Game, setTimeout, SnowGuy*/
 
-var renderer, stage;
+var renderer, stage, snowguy;
 
 function init() {
   Game.updateSize();
