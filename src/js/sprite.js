@@ -57,6 +57,7 @@ var GameButton = function(x, y, asset) {
   this.interactive = true;
   var rotatetween = null;
   var scaletween = null;
+  this.onclicked = function(){};
   
   this.mouseover = function(data) {
     if (rotatetween) rotatetween.stop();
@@ -89,6 +90,7 @@ var GameButton = function(x, y, asset) {
         self.scale.set(this.targetscale, this.targetscale);
       })
       .start();
+    if (this.onclicked) this.onclicked();
   };
   
   this.mouseup = function(data) {
