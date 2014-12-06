@@ -53,10 +53,6 @@ var SnowGuy = function() {
   };
 };
 
-SnowGuy.prototype.spin = function() {
-  // spin
-};
-
 SnowGuy.prototype.constructor = SnowGuy;
 
 var GameButton = function(x, y, asset) {
