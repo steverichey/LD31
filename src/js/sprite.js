@@ -47,10 +47,6 @@ var SnowGuy = function() {
       rarm.rotation = this.rotation;
     })
     .start();
-  
-  butt.update = function() {
-    TWEEN.update();
-  };
 };
 
 SnowGuy.prototype.constructor = SnowGuy;
