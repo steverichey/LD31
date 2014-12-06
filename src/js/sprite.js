@@ -16,24 +16,24 @@ GameSprite.prototype.update = function() {
 };
 
 var SnowGuy = function() {
-  var butt = new GameSprite(512, 600, 'snowman-booty');
-  Game.add(butt);
+  this.butt = new GameSprite(512, 600, 'snowman-booty');
+  Game.add(this.butt);
   
-  var tum = new GameSprite(512, 450, 'snowman-tummy');
-  Game.add(tum);
+  this.tum = new GameSprite(512, 450, 'snowman-tummy');
+  Game.add(this.tum);
   
-  var head = new GameSprite(512, 250, 'snowman-head');
-  Game.add(head);
+  this.head = new GameSprite(512, 250, 'snowman-head');
+  Game.add(this.head);
   
-  var larm = new GameSprite(512, 450, 'snowman-arm-left');
-  Game.add(larm);
+  this.eyes = new GameSprite(512, 250, 'snowman-eyes');
+  Game.add(this.eyes);
   
-  var rarm = new GameSprite(512, 450, 'snowman-arm-right');
-  Game.add(rarm);
   
-  larm.anchor.set(1.5, 0.5);
-  rarm.anchor.set(-0.5, 0.5);
+  this.larm = new GameSprite(512, 450, 'snowman-arm-left');
+  Game.add(this.larm);
   
+  this.rarm = new GameSprite(512, 450, 'snowman-arm-right');
+  Game.add(this.rarm);
   var snowguytween = new TWEEN.Tween({rotation: -0.25})
     .to({rotation: 0.25}, 500)
     .easing(TWEEN.Easing.Sinusoidal.InOut)
@@ -47,6 +47,9 @@ var SnowGuy = function() {
       rarm.rotation = this.rotation;
     })
     .start();
+  
+  this.larm.anchor.set(1.4, 0.5);
+  this.rarm.anchor.set(-0.4, 0.5);
 };
 
 SnowGuy.prototype.constructor = SnowGuy;
