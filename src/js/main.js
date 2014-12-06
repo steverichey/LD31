@@ -20,6 +20,8 @@ function init() {
   var i = 0;
   
   function animate() {
+    TWEEN.update();
+    
     for (i = 0; i < Game.children.length; i++) {
       Game.children[i].update();
     }
