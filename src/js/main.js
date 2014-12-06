@@ -12,8 +12,8 @@ function init() {
   var bg = new GameSprite(512, 384, 'bg');
   Game.add(bg);
   
-  var button = new GameButton(48, 48, 'button');
-  Game.add(button);
+  var buttoneyes = new GameButton(48, 48, 'button');
+  Game.add(buttoneyes);
   
   var snowguy = new SnowGuy();
   
