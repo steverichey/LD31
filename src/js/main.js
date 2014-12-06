@@ -12,6 +12,9 @@ function init() {
   var bg = new GameSprite(512, 384, 'background');
   Game.add(bg);
   
+  var stand = new GameSprite(512, 738, 'stand');
+  Game.add(stand);
+  
   snowguy = new SnowGuy();
   
   var buttons = new GameButtons([64, 192, 320, 448, 576, 704], 'button-left', true);
