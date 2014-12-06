@@ -1,4 +1,4 @@
-/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, Game, setTimeout, SnowGuy*/
+/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy*/
 
 var renderer, stage, snowguy;
 
@@ -14,14 +14,16 @@ function init() {
   
   snowguy = new SnowGuy();
   
-  var buttoneyes = new GameButton(128, 128, 'button-left');
-  Game.add(buttoneyes);
+  var buttons = new GameButtons([64, 192, 320, 448, 576, 704], 'button-left', true);
   
-  buttoneyes.onclicked = function() {
+  buttons.get(0).onclicked = function() {
     snowguy.changeEyes('contacts-green');
   };
   
-  // used in the update loop
+  buttons.get(1).onclicked = function() {
+    snowguy.changeEyes('snowman-eyes');
+  };
+  
   var i = 0;
   
   function animate() {
