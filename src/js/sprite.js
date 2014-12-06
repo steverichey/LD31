@@ -32,31 +32,41 @@ var SnowGuy = function() {
   this.eyes = new GameSprite(512, 250, 'snowman-eyes');
   Game.add(this.eyes);
   
+  var blinktween = null;
+  var self = this;
+  
+  this.eyes.update = function() {
+    if (blinktween === null && Game.random.chance(0.5)) {
+      blinktween = new TWEEN.Tween({eyescale: self.eyes.scale.y})
+        .to({eyescale: 0}, 75)
+        .easing(TWEEN.Easing.Cubic.InOut)
+        .yoyo(true)
+        .repeat(1)
+        .onUpdate(function() {
+          self.eyes.scale.y = this.eyescale;
+        })
+        .onComplete(function() {
+          blinktween = null;
+        })
+        .start();
+    }
+  };
   
   this.larm = new GameSprite(512, 450, 'snowman-arm-left');
   Game.add(this.larm);
   
   this.rarm = new GameSprite(512, 450, 'snowman-arm-right');
   Game.add(this.rarm);
-  var snowguytween = new TWEEN.Tween({rotation: -0.25})
-    .to({rotation: 0.25}, 500)
-    .easing(TWEEN.Easing.Sinusoidal.InOut)
-    .repeat(Infinity)
-    .yoyo(true)
-    .onUpdate(function() {
-      butt.rotation = this.rotation;
-      head.rotation = this.rotation;
-      tum.rotation = this.rotation;
-      larm.rotation = this.rotation;
-      rarm.rotation = this.rotation;
-    })
-    .start();
   
   this.larm.anchor.set(1.4, 0.5);
   this.rarm.anchor.set(-0.4, 0.5);
 };
 
 SnowGuy.prototype.constructor = SnowGuy;
+
+SnowGuy.prototype.changeEyes = function(asset) {
+  this.eyes.changeTexture(asset);
+};
 
 var GameButton = function(x, y, asset) {
   GameSprite.call(this, x, y, asset);
