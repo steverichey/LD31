@@ -90,6 +90,7 @@ var GameButton = function(x, y, asset) {
   
   this.mousedown = function(data) {
     if (scaletween) scaletween.stop();
+    scaletween = new TWEEN.Tween({targetscale: this.scale.x})
       .to({targetscale: 1.5}, 125)
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(function() {
