@@ -5,6 +5,7 @@ var Game = Game || {};
 Game.width  = 0;
 Game.height = 0;
 Game.children = [];
+Game.stage = null;
 
 Game.updateSize = function() {
   Game.width  = 1024;
@@ -35,12 +36,12 @@ Game.relativePosition = function(percent, isWidth) {
 };
 
 Game.add = function(child) {
-  stage.addChild(child);
+  Game.stage.addChild(child);
   Game.children.push(child);
 };
 
 Game.remove = function(child) {
-  stage.removeChild(child);
+  Game.stage.removeChild(child);
   var i = Game.children.indexOf(child);
   
   if (i >= 0) {
