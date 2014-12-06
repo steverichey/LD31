@@ -39,6 +39,14 @@ Game.add = function(child) {
   Game.children.push(child);
 };
 
-Game.wiggle = function(target) {
-  
+Game.random = {};
+
+Game.random.float = function(min, max) {
+  min = min || 0;
+  max = max || 1;
+  return Math.random() * (max - min) + min;
+};
+
+Game.random.int = function(min, max) {
+  return Math.round(Game.random.float(min, max));
 };
