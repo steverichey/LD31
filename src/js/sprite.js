@@ -52,6 +52,12 @@ var SnowGuy = function() {
     }
   };
   
+  this.nose = new GameSprite(512, 270, 'snowman-nose');
+  Game.add(this.nose);
+  
+  this.mouth = new GameSprite(512, 310, 'snowman-mouth');
+  Game.add(this.mouth);
+  
   this.larm = new GameSprite(512, 450, 'snowman-arm-left');
   Game.add(this.larm);
   
