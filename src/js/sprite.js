@@ -15,6 +15,10 @@ GameSprite.prototype.update = function() {
   // update
 };
 
+GameSprite.prototype.changeTexture = function(asset) {
+  this.setTexture(PIXI.Texture.fromImage(Game.getAsset(asset)));
+};
+
 var SnowGuy = function() {
   this.butt = new GameSprite(512, 600, 'snowman-booty');
   Game.add(this.butt);
