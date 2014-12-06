@@ -1,4 +1,6 @@
-# LD31
+# Snowman Beauty Shop
+
+![](./screenshot.png)
 
 Our submission for Ludum Dare 31. Made with the talented and beautiful @kristingish.
 
