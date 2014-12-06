@@ -9,7 +9,7 @@ function init() {
   
   stage = new PIXI.Stage(0x000000, true);
   
-  var bg = new GameSprite(512, 384, 'bg');
+  var bg = new GameSprite(512, 384, 'background');
   Game.add(bg);
   
   snowguy = new SnowGuy();
