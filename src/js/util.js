@@ -67,5 +67,9 @@ Game.random.int = function(min, max) {
 };
 
 Game.random.chance = function(likelihood) {
+  if (typeof likelihood === 'undefined') {
+    likelihood = 50;
+  }
+  
   return (likelihood > Game.random.float(0, 100));
 };
