@@ -28,15 +28,25 @@ function init() {
   var snowflakelayer = new PIXI.DisplayObjectContainer();
   Game.stage.addChild(snowflakelayer);
   
+  // the stand
+  
+  var stand = new GameSprite(512, 700, 'stand');
+  //Game.add(stand);
+  
   // snow guy!
   
   snowguy = new SnowGuy();
+  
+  // header image
+  
+  var header = new GameSprite(512, 86, 'header');
+  Game.add(header);
   
   // Setting up buttons
   
   var leftchoice = 0;
   var rightchoice = 0;
-  leftbuttons   = new GameButtons(['snowman-eyes', 'snowman-nose', 'snowman-mouth', 'stand', 'stand'], GameButtons.Options.LEFT_SIDE);
+  leftbuttons   = new GameButtons(['btn-eyes', 'btn-mouth', 'btn-hair', 'btn-makeup', 'btn-accessories'], GameButtons.Options.LEFT_SIDE);
   rightbuttons  = null;
   centerbuttons = null;
   var changeType = SnowGuy.Part.Eyes;
