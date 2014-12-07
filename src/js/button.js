@@ -1,7 +1,11 @@
 /*global GameSprite, TWEEN, Game, PIXI*/
 
-var GameButton = function(x, y, parent) {
-  GameSprite.call(this, x, y, 'button');
+var GameButton = function(x, y, graphic, parent) {
+  if (typeof graphic === 'undefined') {
+    graphic = 'button';
+  }
+  
+  GameSprite.call(this, x, y, graphic);
   var self = this;
   this.interactive = true;
   this.index = 0;
@@ -74,7 +78,7 @@ var GameButton = function(x, y, parent) {
 
 GameButton.prototype = Object.create(GameSprite.prototype);
 GameButton.prototype.constructor = GameButton;
-
+/*
 GameButton.prototype.addTopGraphic = function(asset) {
   var rect = new PIXI.Graphics();
   rect.drawRect(this.x, this.y, this.width, this.height);
@@ -84,10 +88,10 @@ GameButton.prototype.addTopGraphic = function(asset) {
   
   this.innerRatio = this.innerGraphic.width / this.innerGraphic.height;
   this.graphicName = asset;
-};
+};*/
 
 GameButton.prototype.update = function() {
-  if (this.innerGraphic !== null) {
+  /*if (this.innerGraphic !== null) {
     this.innerGraphic.x = this.x;
     this.innerGraphic.y = this.y;
     this.innerGraphic.rotation = this.rotation;
@@ -98,5 +102,5 @@ GameButton.prototype.update = function() {
       this.innerGraphic.width = this.width * 0.8;
       this.innerGraphic.height = this.innerGraphic.width / this.innerRatio;
     }
-  }
+  }*/
 };
