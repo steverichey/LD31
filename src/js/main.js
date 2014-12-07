@@ -6,6 +6,8 @@ function init() {
   Game.updateSize();
   renderer = new PIXI.WebGLRenderer(Game.width, Game.height);
   document.body.appendChild(renderer.view);
+  var leftchoice = 0;
+  var rightchoice = 0;
   
   Game.stage = new PIXI.Stage(0x000000, true);
   
@@ -20,14 +22,16 @@ function init() {
   leftbuttons   = new GameButtons(['snowman-eyes', 'snowman-nose', 'snowman-mouth', 'stand', 'stand'], GameButtons.Options.LEFT_SIDE);
   rightbuttons  = null;
   centerbuttons = null;
+  var changeType = SnowGuy.Part.Eyes;
   
   function createright(index) {
     rightbuttons = null;
     
     var options = [];
+    leftchoice = index;
     
     switch (index) {
-      case 0: options = ['snowman-eyes', 'stand', 'stand', 'stand', 'stand'];
+      case 0: options = ['snowman-eyes', 'glasses-cateye', 'stand', 'stand', 'stand'];
         break;
       default: options = ['stand', 'stand', 'stand', 'stand', 'stand'];
         break;
@@ -50,9 +54,21 @@ function init() {
     centerbuttons = null;
     
     var options = [];
+    rightchoice = index;
     
-    switch (index) {
-      case 0: options = ['snowman-eyes', 'contacts-big-blue', 'contacts-big-brown', 'contacts-big-purple', 'contacts-blue-green', 'contacts-blue', 'contacts-brown', 'contacts-gray', 'contacts-red', 'contacts-violet'];
+    switch (leftchoice) {
+      case 0:
+        switch (rightchoice) {
+          case 0:
+            changeType = SnowGuy.Part.Eyes;
+            options = ['snowman-eyes', 'contacts-big-blue', 'contacts-big-brown', 'contacts-big-purple', 'contacts-blue-green', 'contacts-blue', 'contacts-brown', 'contacts-gray', 'contacts-red', 'contacts-violet'];
+            break;
+          case 1:
+            changeType = SnowGuy.Part.Glasses;
+            options = ['glasses-cateye', 'glasses-wayfairer'];
+            break;
+        }
+        
         break;
       default: options = ['stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand'];
         break;
@@ -61,9 +77,12 @@ function init() {
     centerbuttons = new GameButtons(options, GameButtons.Options.CENTER_BOTTOM);
     
     centerbuttons.setAllOnClicked(function(subindex) {
-      switch (index) {
-        case 0: // we picked eyes
+      switch (changeType) {
+        case SnowGuy.Part.Eyes: // eyes
           snowguy.changeEyes(centerbuttons.get(subindex).graphicName);
+          break;
+        case SnowGuy.Part.Glasses:
+          snowguy.changeGlasses(centerbuttons.get(subindex).graphicName);
           break;
         default:
           snowguy.changeMouth('stand');
