@@ -1,22 +1,22 @@
 /*global GameSprite, Game, TWEEN*/
 
 var SnowGuy = function() {
-  this.MIN_EYE_X = 502;
-  this.MAX_EYE_X = 522;
-  this.MIN_EYE_Y = 240;
-  this.MAX_EYE_Y = 250;
-  
-  this.butt = new GameSprite(512, 600, 'snowman-booty');
+  this.butt = new GameSprite(512, 620, 'snowman-booty');
   Game.add(this.butt);
   
-  this.tum = new GameSprite(512, 450, 'snowman-tummy');
+  this.tum = new GameSprite(512, 515, 'snowman-tummy');
   Game.add(this.tum);
   
-  this.head = new GameSprite(512, 250, 'snowman-head');
+  this.head = new GameSprite(512, 340, 'snowman-head');
   Game.add(this.head);
   
-  this.eyes = new GameSprite(512, 250, 'snowman-eyes');
+  this.eyes = new GameSprite(512, this.head.y, 'snowman-eyes');
   Game.add(this.eyes);
+  
+  this.MIN_EYE_X = this.eyes.x - 10;
+  this.MAX_EYE_X = this.eyes.x + 10;
+  this.MIN_EYE_Y = this.eyes.y - 10;
+  this.MAX_EYE_Y = this.eyes.y + 10;
   
   this.hair = {};
   
@@ -40,19 +40,22 @@ var SnowGuy = function() {
     }
   };
   
-  this.nose = new GameSprite(512, 270, 'snowman-nose');
+  this.nose = new GameSprite(512, this.eyes.y + 30, 'snowman-nose');
   Game.add(this.nose);
   
-  this.mouth = new GameSprite(512, 310, 'snowman-mouth');
+  this.mouth = new GameSprite(512, this.eyes.y + 70, 'snowman-mouth');
   Game.add(this.mouth);
   
-  this.glasses = new GameSprite(512, 250);
+  this.lashes = new GameSprite(512, this.eyes.y - 50);
+  Game.add(this.lashes);
+  
+  this.glasses = new GameSprite(512, this.eyes.y + 10);
   Game.add(this.glasses);
   
-  this.larm = new GameSprite(512, 450, 'snowman-arm-left');
+  this.larm = new GameSprite(512, this.tum.y, 'snowman-arm-left');
   Game.add(this.larm);
   
-  this.rarm = new GameSprite(512, 450, 'snowman-arm-right');
+  this.rarm = new GameSprite(512, this.tum.y, 'snowman-arm-right');
   Game.add(this.rarm);
   
   this.larm.anchor.set(1.4, 0.5);
@@ -81,6 +84,10 @@ SnowGuy.prototype.changeHair = function(asset) {
   this.hair.changeTexture(asset);
 };
 
+SnowGuy.prototype.changeLashes = function(asset) {
+  this.lashes.changeTexture(asset);
+};
+
 SnowGuy.prototype.lookAt = function(x, y) {
   this.eyes.x = this.MIN_EYE_X + (this.MAX_EYE_X - this.MIN_EYE_X) * (x / Game.width);
   this.eyes.y = this.MIN_EYE_Y + (this.MAX_EYE_Y - this.MIN_EYE_Y) * (y / Game.height);
@@ -91,5 +98,6 @@ SnowGuy.Part = {
   Glasses: 1,
   Makeup:  2,
   Nose:    3,
-  Mouth:   4
+  Mouth:   4,
+  Lashes:  5
 };
