@@ -33,8 +33,8 @@ function init() {
   
   // the stand
   
-  var stand = new GameSprite(512, 700, 'stand');
-  //Game.add(stand);
+  var stand = new GameSprite(512, 675, 'stand');
+  Game.add(stand);
   
   // snow guy!
   
