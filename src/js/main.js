@@ -2,24 +2,32 @@
 
 var renderer, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
 
+var snowflakes = [];
+var NUMBER_OF_FLAKES = 100;
+
 function init() {
+  // game and rendering setup stuff
+  
   Game.updateSize();
   renderer = new PIXI.WebGLRenderer(Game.width, Game.height);
   renderer.view.setAttribute('id', 'gamecanvas');
   document.body.appendChild(renderer.view);
-  var leftchoice = 0;
-  var rightchoice = 0;
   
   Game.stage = new PIXI.Stage(0x000000, true);
+  
+  // the BG
   
   var bg = new GameSprite(512, 384, 'background');
   Game.add(bg);
   
-  var stand = new GameSprite(512, 738, 'stand');
-  Game.add(stand);
+  // snow guy!
   
   snowguy = new SnowGuy();
   
+  // Setting up buttons
+  
+  var leftchoice = 0;
+  var rightchoice = 0;
   leftbuttons   = new GameButtons(['snowman-eyes', 'snowman-nose', 'snowman-mouth', 'stand', 'stand'], GameButtons.Options.LEFT_SIDE);
   rightbuttons  = null;
   centerbuttons = null;
@@ -28,11 +36,17 @@ function init() {
   function createright(index) {
     rightbuttons = null;
     
+    if (centerbuttons !== null) {
+      centerbuttons.hide(function() {
+        centerbuttons = null;
+      });
+    }
+    
     var options = [];
     leftchoice = index;
     
     switch (index) {
-      case 0: options = ['snowman-eyes', 'glasses-cateye', 'stand', 'stand', 'stand'];
+      case 0: options = ['snowman-eyes', 'glasses-cateye', 'lashes-01', 'stand', 'stand'];
         break;
       default: options = ['stand', 'stand', 'stand', 'stand', 'stand'];
         break;
@@ -66,12 +80,16 @@ function init() {
             break;
           case 1:
             changeType = SnowGuy.Part.Glasses;
-            options = ['glasses-cateye', 'glasses-wayfairer', 'glasses-rayban', 'eyes-squinty'];
+            options = ['empty', 'glasses-cateye', 'glasses-wayfairer', 'glasses-rayban', 'eyes-squinty'];
+            break;
+          case 2:
+            changeType = SnowGuy.Part.Lashes;
+            options = ['empty', 'lashes-01'];
             break;
         }
         
         break;
-      default: options = ['stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand', 'stand'];
+      default: options = ['stand', 'stand', 'stand', 'stand'];
         break;
     }
     
@@ -84,6 +102,9 @@ function init() {
           break;
         case SnowGuy.Part.Glasses:
           snowguy.changeGlasses(centerbuttons.get(subindex).graphicName);
+          break;
+        case SnowGuy.Part.Lashes:
+          snowguy.changeLashes(centerbuttons.get(subindex).graphicName);
           break;
         default:
           snowguy.changeMouth('stand');
@@ -103,6 +124,19 @@ function init() {
   });
   
   var i = 0;
+  
+  // creating some snoooooow
+  
+  for (i = 0; i < NUMBER_OF_FLAKES; i++) {
+    var flake = new GameSprite(-100, -100, 'flake');
+    snowflakes.push(flake);
+    Game.add(flake);
+    
+    flake.update = function() {
+      flake.position.x += 1;
+      flake.position.y += 1;
+    }
+  }
   
   function animate() {
     TWEEN.update();
