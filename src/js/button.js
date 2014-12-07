@@ -1,7 +1,7 @@
 /*global GameSprite, TWEEN, Game, PIXI*/
 
 var GameButton = function(x, y, parent) {
-  GameSprite.call(this, x, y, 'button-left');
+  GameSprite.call(this, x, y, 'button');
   var self = this;
   this.interactive = true;
   this.index = 0;
@@ -12,6 +12,13 @@ var GameButton = function(x, y, parent) {
   this.innerGraphic = null;
   this.innerRatio = 0;
   this.graphicName = '';
+  
+  /* shadow test stuff
+  this.tint = 0x000000;
+  this.blur = new PIXI.BlurFilter();
+  this.filters = [this.blur];
+  this.blur.blur = 20;
+  */
   
   this.mouseover = function(data) {
     if (rotatetween) rotatetween.stop();
