@@ -24,6 +24,11 @@ var Snowdio = (function() {
   */
   var debug = true;
   
+  /*
+   * Whether or not to mute everything.
+  */
+  var muted = false;
+  
   function init() {
     try {
       window.AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -58,10 +63,28 @@ var Snowdio = (function() {
     request.send();
   }
   
-  function play(name) {
+  function get(name) {
     for (var i = 0; i < sounds.length; i++) {
       if (sounds[i].url.indexOf(name) !== -1) {
-        sounds[i].play();
+        return sounds[i];
+      }
+    }
+  }
+  
+  function play(name) {
+    get(name).play();
+  }
+  
+  function mute() {
+    for (var i = 0; i < sounds.length; i++) {
+      sounds[i].setVolume(0);
+    }
+  }
+  
+  function unmute() {
+    for (var i = 0; i < sounds.length; i++) {
+      if (sounds[i].playing) {
+        sounds[i].setVolume(1);
       }
     }
   }
@@ -82,6 +105,7 @@ var Snowdio = (function() {
   
   return {
     init       : init,
+    get        : get,
     load       : load,
     play       : play,
     getContext : getContext,
@@ -95,13 +119,42 @@ var Snowdio = (function() {
 var Snownd = function(buffer, url) {
   this.buffer = buffer;
   this.url = url;
+  this.playing = false;
+  this.looped = false;
+  this.gainNode = null;
 };
 
 Snownd.prototype.constructor = Snownd;
 
 Snownd.prototype.play = function() {
   var source = Snowdio.getContext().createBufferSource();
+  this.gainNode = Snowdio.getContext().createGain();
   source.buffer = this.buffer;
-  source.connect(Snowdio.getContext().destination);
+  //source.connect(Snowdio.getContext().destination);
+  source.connect(this.gainNode);
+  this.gainNode.connect(Snowdio.getContext().destination);
+  source.onended = function() {
+    this.playing = false;
+  };
+  source.loop = this.looped;
   source.start(0);
+  this.playing = true;
+};
+
+/**
+ * Set this sound to a new volume.
+ *
+ * @param {Float} volume The volume to set to, from 0 to 1.
+ */
+Snownd.prototype.setVolume = function(volume) {
+  // dummy check
+  if (typeof volume === 'undefined') return;
+  // kind of ensure it's a float
+  volume = parseFloat(volume);
+  // bounds checking, the web audio api is crazy dumb and will let you set the volume to 9007199254740991
+  if (volume > 1) volume = 1;
+  if (volume < 0) volume = 0;
+  // set volume
+  this.gainNode.gain.value = volume;
+  console.log('volume set to ' + this.gainNode.gain.value);
 };
