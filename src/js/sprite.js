@@ -2,7 +2,12 @@
 
 var GameSprite = function(x, y, asset) {
   // extends sprite
-  PIXI.Sprite.call(this, PIXI.Texture.fromImage(Game.getAsset(asset)));
+  if (asset) {
+    PIXI.Sprite.call(this, PIXI.Texture.fromImage(Game.getAsset(asset)));
+  } else {
+    PIXI.Sprite.call(this, PIXI.Texture.fromImage(Game.getAsset('empty')));
+  }
+  
   this.anchor.set(0.5, 0.5);
   this.position.x = x;
   this.position.y = y;
