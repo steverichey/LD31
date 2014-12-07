@@ -76,16 +76,32 @@ var Snowdio = (function() {
   }
   
   function mute() {
+    if (muted) return;
+    
     for (var i = 0; i < sounds.length; i++) {
       sounds[i].setVolume(0);
     }
+    
+    muted = true;
   }
   
   function unmute() {
+    if (!muted) return;
+    
     for (var i = 0; i < sounds.length; i++) {
       if (sounds[i].playing) {
         sounds[i].setVolume(1);
       }
+    }
+    
+    muted = false;
+  }
+  
+  function toggleMuted() {
+    if (muted) {
+      unmute();
+    } else {
+      mute();
     }
   }
   
@@ -104,12 +120,15 @@ var Snowdio = (function() {
   }
   
   return {
-    init       : init,
-    get        : get,
-    load       : load,
-    play       : play,
-    getContext : getContext,
-    setDebug   : setDebug
+    init        : init,
+    get         : get,
+    load        : load,
+    play        : play,
+    getContext  : getContext,
+    setDebug    : setDebug,
+    mute        : mute,
+    unmute      : unmute,
+    toggleMuted : toggleMuted
   };
 }());
 
