@@ -1,4 +1,4 @@
-/*global window, stage*/
+/*global window, stage, document*/
 
 var Game = Game || {};
 
@@ -10,6 +10,11 @@ Game.stage = null;
 Game.updateSize = function() {
   Game.width  = 1024;
   Game.height = 768;
+};
+
+Game.screenshot = function() {
+  var canvas = document.getElementById('gamecanvas');
+  return canvas.toDataURL("image/png");
 };
 
 /**
