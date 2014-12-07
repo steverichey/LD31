@@ -85,3 +85,11 @@ SnowGuy.prototype.lookAt = function(x, y) {
   this.eyes.x = this.MIN_EYE_X + (this.MAX_EYE_X - this.MIN_EYE_X) * (x / Game.width);
   this.eyes.y = this.MIN_EYE_Y + (this.MAX_EYE_Y - this.MIN_EYE_Y) * (y / Game.height);
 };
+
+SnowGuy.Part = {
+  Eyes:    0,
+  Glasses: 1,
+  Makeup:  2,
+  Nose:    3,
+  Mouth:   4
+};
