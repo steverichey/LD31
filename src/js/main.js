@@ -65,7 +65,7 @@ function init() {
             break;
           case 1:
             changeType = SnowGuy.Part.Glasses;
-            options = ['glasses-cateye', 'glasses-wayfairer'];
+            options = ['glasses-cateye', 'glasses-wayfairer', 'glasses-rayban', 'eyes-squinty'];
             break;
         }
         
