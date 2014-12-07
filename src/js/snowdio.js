@@ -2,6 +2,9 @@
 
 /**
  * The greatest HTML5 audio library ever created for a Ludum Dare this year by me.
+ *
+ * @author  Steve Richey (STVR)
+ * @license MIT. Use it for whatevs.
  */
 var Snowdio = (function() {
   'use strict';
@@ -16,18 +19,23 @@ var Snowdio = (function() {
   */
   var sounds = [];
   
+  /*
+   * Whether or not to log debug statements.
+  */
+  var debug = true;
+  
   function init() {
     try {
       window.AudioContext = window.AudioContext || window.webkitAudioContext;
       context = new AudioContext();
-      console.log("Snowdio v1.0.0 has been initialized");
+      log("v1.0.0 Initialized");
     } catch (e) {
-      console.log("Web Audio API is not supported :(");
+      log("Web Audio API is not supported :(");
     }
   }
   
-  function load(url) {
-    console.log('trying to load ' + url);
+  function load(url, callback) {
+    log('Loading ' + url);
     var request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.responseType = 'arraybuffer';
@@ -37,9 +45,13 @@ var Snowdio = (function() {
       context.decodeAudioData(request.response, function(buffer) {
         var sound = new Snownd(buffer, url);
         sounds.push(sound);
-        console.log('loaded sound from ' + url);
+        log('Loaded ' + url);
+        
+        if (callback && typeof callback === 'function') {
+          callback();
+        }
       }, function() {
-        console.log('failed to load sound from ' + url);
+        log('Failed ' + url);
       });
     };
     
@@ -50,7 +62,6 @@ var Snowdio = (function() {
     for (var i = 0; i < sounds.length; i++) {
       if (sounds[i].url.indexOf(name) !== -1) {
         sounds[i].play();
-        console.log('playing ' + sounds[i].url);
       }
     }
   }
@@ -59,16 +70,27 @@ var Snowdio = (function() {
     return context;
   }
   
+  function setDebug(bool) {
+    debug = bool;
+  }
+  
+  function log(text) {
+    if (debug) {
+      console.log('[SNOWDIO] ' + text);
+    }
+  }
+  
   return {
-    init: init,
-    load: load,
-    play: play,
-    getContext : getContext
+    init       : init,
+    load       : load,
+    play       : play,
+    getContext : getContext,
+    setDebug   : setDebug
   };
 }());
 
 /**
- * Storage for a single decoded audio buffer.
+ * Storage for a single decoded audio buffer and a URL to ID it.
  */
 var Snownd = function(buffer, url) {
   this.buffer = buffer;
