@@ -1,9 +1,9 @@
-/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy*/
+/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy, Flake, Snowdio*/
 
 var renderer, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
 
-var snowflakes = [];
-var NUMBER_OF_FLAKES = 100;
+var NUMBER_OF_FLAKES = 50;
+var flakes = [];
 
 function init() {
   // game and rendering setup stuff
@@ -14,6 +14,9 @@ function init() {
   document.body.appendChild(renderer.view);
   
   Game.stage = new PIXI.Stage(0x000000, true);
+  
+  Snowdio.init();
+  Snowdio.load('./snd/meow.ogg');
   
   // the BG
   
@@ -36,19 +39,13 @@ function init() {
   function createright(index) {
     rightbuttons = null;
     
-    if (centerbuttons !== null) {
-      centerbuttons.hide(function() {
-        centerbuttons = null;
-      });
-    }
-    
     var options = [];
     leftchoice = index;
     
     switch (index) {
       case 0: options = ['snowman-eyes', 'glasses-cateye', 'lashes-01', 'stand', 'stand'];
         break;
-      default: options = ['stand', 'stand', 'stand', 'stand', 'stand'];
+      case 1: options = ['snowman-nose', 'stand', 'stand', 'stand', 'stand'];
         break;
     }
     
@@ -68,7 +65,7 @@ function init() {
   function createCenter(index) {
     centerbuttons = null;
     
-    var options = [];
+    var options = ['stand'];
     rightchoice = index;
     
     switch (leftchoice) {
@@ -87,9 +84,14 @@ function init() {
             options = ['empty', 'lashes-01'];
             break;
         }
-        
         break;
-      default: options = ['stand', 'stand', 'stand', 'stand'];
+      case 1:
+        switch(rightchoice) {
+          case 0:
+            changeType = SnowGuy.Part.Nose;
+            options = ['empty', 'snowman-nose', 'snowman-nose-blue'];
+            break;
+        }
         break;
     }
     
@@ -97,7 +99,7 @@ function init() {
     
     centerbuttons.setAllOnClicked(function(subindex) {
       switch (changeType) {
-        case SnowGuy.Part.Eyes: // eyes
+        case SnowGuy.Part.Eyes:
           snowguy.changeEyes(centerbuttons.get(subindex).graphicName);
           break;
         case SnowGuy.Part.Glasses:
@@ -106,14 +108,20 @@ function init() {
         case SnowGuy.Part.Lashes:
           snowguy.changeLashes(centerbuttons.get(subindex).graphicName);
           break;
-        default:
-          snowguy.changeMouth('stand');
+        case SnowGuy.Part.Nose:
+          snowguy.changeNose(centerbuttons.get(subindex).graphicName);
           break;
       }
     });
   }
   
   leftbuttons.setAllOnClicked(function(index) {
+    if (centerbuttons !== null) {
+      centerbuttons.hide(function() {
+        centerbuttons = null;
+      });
+    }
+    
     if (rightbuttons !== null) {
       rightbuttons.hide(function() {
         createright(index);
@@ -125,23 +133,16 @@ function init() {
   
   var i = 0;
   
-  // creating some snoooooow
-  
-  for (i = 0; i < NUMBER_OF_FLAKES; i++) {
-    var flake = new GameSprite(-100, -100, 'flake');
-    snowflakes.push(flake);
-    Game.add(flake);
-    
-    flake.update = function() {
-      flake.position.x += 1;
-      flake.position.y += 1;
-    }
-  }
-  
   function animate() {
     TWEEN.update();
     
     snowguy.lookAt(mouse.x, mouse.y);
+    
+    if (flakes.length < NUMBER_OF_FLAKES && Game.random.chance(2)) {
+      var newflake = new Flake();
+      flakes.push(newflake);
+      Game.add(newflake);
+    }
     
     for (i = 0; i < Game.children.length; i++) {
       Game.children[i].update();
