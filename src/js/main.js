@@ -50,102 +50,27 @@ function init() {
   var leftchoice = 0;
   var rightchoice = 0;
   leftbuttons   = new GameButtons(['btn-eyes', 'btn-mouth', 'btn-hair', 'btn-makeup', 'btn-accessories'], GameButtons.Options.LEFT_SIDE);
-  rightbuttons  = null;
+  rightbuttons  = new GameButtons(['btn-clear', 'btn-camera', 'btn-sound'], GameButtons.Options.RIGHT_SIDE);
   centerbuttons = null;
   var changeType = SnowGuy.Part.Eyes;
   
-  function createright(index) {
-    rightbuttons = null;
-    
-    var options = [];
-    leftchoice = index;
-    
-    switch (index) {
-      case 0: options = ['snowman-eyes', 'glasses-cateye', 'lashes-01', 'stand', 'stand'];
-        break;
-      case 1: options = ['snowman-nose', 'stand', 'stand', 'stand', 'stand'];
-        break;
-    }
-    
-    rightbuttons = new GameButtons(options, GameButtons.Options.RIGHT_SIDE);
-    
-    rightbuttons.setAllOnClicked(function(index) {
-      if (centerbuttons !== null) {
-        centerbuttons.hide(function() {
-          createCenter(index);
-        });
-      } else {
-        createCenter(index);
-      }
-    });
-  }
-  
-  function createCenter(index) {
-    centerbuttons = null;
-    
-    var options = ['stand'];
-    rightchoice = index;
-    
-    switch (leftchoice) {
-      case 0:
-        switch (rightchoice) {
-          case 0:
-            changeType = SnowGuy.Part.Eyes;
-            options = ['snowman-eyes', 'contacts-big-blue', 'contacts-big-brown', 'contacts-big-purple', 'contacts-blue-green', 'contacts-blue', 'contacts-brown', 'contacts-gray', 'contacts-red', 'contacts-violet'];
-            break;
-          case 1:
-            changeType = SnowGuy.Part.Glasses;
-            options = ['empty', 'glasses-cateye', 'glasses-wayfairer', 'glasses-rayban', 'eyes-squinty'];
-            break;
-          case 2:
-            changeType = SnowGuy.Part.Lashes;
-            options = ['empty', 'lashes-01'];
-            break;
-        }
-        break;
-      case 1:
-        switch(rightchoice) {
-          case 0:
-            changeType = SnowGuy.Part.Nose;
-            options = ['empty', 'snowman-nose', 'snowman-nose-blue'];
-            break;
-        }
-        break;
-    }
-    
-    centerbuttons = new GameButtons(options, GameButtons.Options.CENTER_BOTTOM);
-    
-    centerbuttons.setAllOnClicked(function(subindex) {
-      switch (changeType) {
-        case SnowGuy.Part.Eyes:
-          snowguy.changeEyes(centerbuttons.get(subindex).graphicName);
-          break;
-        case SnowGuy.Part.Glasses:
-          snowguy.changeGlasses(centerbuttons.get(subindex).graphicName);
-          break;
-        case SnowGuy.Part.Lashes:
-          snowguy.changeLashes(centerbuttons.get(subindex).graphicName);
-          break;
-        case SnowGuy.Part.Nose:
-          snowguy.changeNose(centerbuttons.get(subindex).graphicName);
-          break;
-      }
-    });
-  }
-  
   leftbuttons.setAllOnClicked(function(index) {
-    if (centerbuttons !== null) {
-      centerbuttons.hide(function() {
-        centerbuttons = null;
-      });
-    }
-    
-    if (rightbuttons !== null) {
-      rightbuttons.hide(function() {
-        createright(index);
-      });
-    } else {
-      createright(index);
+    switch (index) {
+      case 0: // eyes
+        
+        break;
+      case 1: // mouth
+        
+        break;
+      case 2: // hair
+        
+        break;
+      case 3: // makeup
+        
+        break;
+      case 4: // accessories
+        
+        break;
     }
   });
   
