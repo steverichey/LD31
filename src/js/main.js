@@ -61,6 +61,25 @@ function init() {
   centerbuttons = null;
   var changeType = SnowGuy.Part.Eyes;
   
+  rightbuttons.get(0).onclicked = function() {
+    // clear snowguy settings
+    snowguy.changeEyes('snowman-eyes');
+    snowguy.changeGlasses('empty');
+    snowguy.changeHair('empty');
+    snowguy.changeLashes('empty');
+    snowguy.changeMouth('snowman-mouth');
+    snowguy.changeNose('snowman-nose');
+  };
+  
+  rightbuttons.get(1).onclicked = function() {
+    // take a pic
+  };
+  
+  rightbuttons.get(2).onclicked = function() {
+    // mute sounds
+    Snowdio.toggleMuted();
+  };
+  
   leftbuttons.setAllOnClicked(function(index) {
     switch (index) {
       case 0: // eyes
