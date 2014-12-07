@@ -3,6 +3,7 @@
 var GameButtons = function(assetArray, type) {
   var amount = assetArray.length;
   this.buttonsArray = [];
+  this.buttonCallbacks = [];
   var self = this;
   this.type = type;
   this.blocked = true;
@@ -41,11 +42,11 @@ var GameButtons = function(assetArray, type) {
   var i = 0;
   
   for (i = 0; i < amount; i++) {
-    var button = new GameButton(initialX + i * deltaX, initialY + i * deltaY, self);
+    var button = new GameButton(initialX + i * deltaX, initialY + i * deltaY, assetArray[i], self);
     this.buttonsArray.push(button);
     Game.add(button);
-    button.addTopGraphic(assetArray[i]);
     button.index = i;
+    button.onclicked = this.onButtonClick;
   }
   
   new TWEEN.Tween({positionX: this.buttonsArray[0].x, positionY: this.buttonsArray[0].y})
@@ -112,9 +113,25 @@ GameButtons.prototype.hide = function(callback) {
 };
 
 GameButtons.prototype.setAllOnClicked = function(callback) {
-  this.buttonsArray.forEach(function(button, index) {
-    button.onclicked = callback;
+  this.buttonCallbacks = [];
+  
+  for (var i = 0; i < this.buttonsArray.length; i++) {
+    this.buttonCallbacks.push(callback);
+  }
+};
+
+GameButtons.prototype.onButtonClick = function(index) {
+  var self = this.parentButtonGroup;
+  
+  self.buttonsArray.forEach(function(obj, ind) {
+    obj.tint = 0xFFFFFF;
   });
+  
+  self.buttonsArray[index].tint = 0xAAAAFF;
+  
+  if (typeof self.buttonCallbacks[index] === 'function') {
+    self.buttonCallbacks[index](index);
+  }
 };
 
 GameButtons.prototype.block = function(duration) {
