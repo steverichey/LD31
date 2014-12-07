@@ -11,8 +11,8 @@ var GameButtons = function(assetArray, type) {
   
   var initialX    = 0;
   var finalX      = 0;
-  var deltaY      = Game.height / amount;
-  var initialY    = deltaY / 2;
+  var deltaY      = (Game.height - 150) / amount;
+  var initialY    = 200;
   var deltaX      = 0;
   var finalDeltaX = 0;
   var finalY      = 0;
@@ -20,8 +20,8 @@ var GameButtons = function(assetArray, type) {
   
   switch (type) {
       case GameButtons.Options.RIGHT_SIDE:
-        initialX = Game.width + 64;
-        finalX   = Game.width - 64;
+        initialX = Game.width + 70;
+        finalX   = Game.width - 70;
         break;
       case GameButtons.Options.CENTER_BOTTOM:
         deltaX      = 128;
@@ -33,8 +33,8 @@ var GameButtons = function(assetArray, type) {
         initialY    = Game.height + 64;
         break;
       default: // LEFT_SIDE
-        initialX = -64;
-        finalX   =  64;
+        initialX = -70;
+        finalX   =  70;
         break;
   }
   
