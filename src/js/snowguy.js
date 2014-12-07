@@ -46,6 +46,9 @@ var SnowGuy = function() {
   this.mouth = new GameSprite(512, 310, 'snowman-mouth');
   Game.add(this.mouth);
   
+  this.glasses = new GameSprite(512, 250);
+  Game.add(this.glasses);
+  
   this.larm = new GameSprite(512, 450, 'snowman-arm-left');
   Game.add(this.larm);
   
@@ -60,6 +63,10 @@ SnowGuy.prototype.constructor = SnowGuy;
 
 SnowGuy.prototype.changeEyes = function(asset) {
   this.eyes.changeTexture(asset);
+};
+
+SnowGuy.prototype.changeGlasses = function(asset) {
+  this.glasses.changeTexture(asset);
 };
 
 SnowGuy.prototype.changeNose = function(asset) {
