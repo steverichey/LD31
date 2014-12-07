@@ -40,8 +40,19 @@ Game.relativePosition = function(percent, isWidth) {
   return isWidth ? percent * Game.width : percent * Game.height;
 };
 
-Game.add = function(child) {
-  Game.stage.addChild(child);
+/**
+ * Adds a sprite to the game/stage.
+ * 
+ * @param {GameSprite}                  child The sprite to add. Must be a GameSprite.
+ * @param {PIXI.DisplayObjectContainer} layer Optional layer to add it to.
+ */
+Game.add = function(child, layer) {
+  if (typeof layer === 'undefined') {
+    Game.stage.addChild(child);
+  } else {
+    layer.addChild(child);
+  }
+  
   Game.children.push(child);
 };
 
