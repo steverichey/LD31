@@ -80,6 +80,18 @@ function init() {
     Snowdio.toggleMuted();
   };
   
+  function showCenter(index) {
+    var options = [];
+    
+    for (var i = 0; i < gameOptions[index].options.length; i++) {
+      options.push(gameOptions[index].options[i].button);
+    }
+    
+    console.log(options);
+    
+    centerbuttons = new GameButtons(options, GameButtons.Options.CENTER_BOTTOM);
+  }
+  
   leftbuttons.setAllOnClicked(function(index) {
     switch (index) {
       case 0: // eyes
