@@ -23,6 +23,11 @@ function init() {
   var bg = new GameSprite(512, 384, 'background');
   Game.add(bg);
   
+  // the snowflake layer
+  
+  var snowflakelayer = new PIXI.DisplayObjectContainer();
+  Game.stage.addChild(snowflakelayer);
+  
   // snow guy!
   
   snowguy = new SnowGuy();
@@ -141,7 +146,7 @@ function init() {
     if (flakes.length < NUMBER_OF_FLAKES && Game.random.chance(2)) {
       var newflake = new Flake();
       flakes.push(newflake);
-      Game.add(newflake);
+      Game.add(newflake, snowflakelayer);
     }
     
     for (i = 0; i < Game.children.length; i++) {
