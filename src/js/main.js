@@ -5,6 +5,7 @@ var renderer, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y
 function init() {
   Game.updateSize();
   renderer = new PIXI.WebGLRenderer(Game.width, Game.height);
+  renderer.view.setAttribute('id', 'gamecanvas');
   document.body.appendChild(renderer.view);
   var leftchoice = 0;
   var rightchoice = 0;
