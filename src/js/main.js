@@ -16,7 +16,7 @@ function init() {
   Game.stage = new PIXI.Stage(0x000000, true);
   
   Snowdio.init();
-  Snowdio.load('./snd/meow.ogg');
+  Snowdio.load('./snd/teru.wav', function() { Snowdio.play('teru'); });
   
   // the BG
   
