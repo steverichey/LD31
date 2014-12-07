@@ -49,7 +49,14 @@ function init() {
   
   var leftchoice = 0;
   var rightchoice = 0;
-  leftbuttons   = new GameButtons(['btn-eyes', 'btn-mouth', 'btn-hair', 'btn-makeup', 'btn-accessories'], GameButtons.Options.LEFT_SIDE);
+  var leftoptions = [];
+  
+  // parses options.js for button graphic names
+  for (var i = 0; i < gameOptions.length; i++) {
+    leftoptions.push(gameOptions[i].button);
+  }
+  
+  leftbuttons   = new GameButtons(leftoptions, GameButtons.Options.LEFT_SIDE);
   rightbuttons  = new GameButtons(['btn-clear', 'btn-camera', 'btn-sound'], GameButtons.Options.RIGHT_SIDE);
   centerbuttons = null;
   var changeType = SnowGuy.Part.Eyes;
