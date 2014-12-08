@@ -84,3 +84,7 @@ Game.random.chance = function(likelihood) {
   
   return (likelihood > Game.random.float(0, 100));
 };
+
+var contains = function(string, phrase) {
+  return string.indexOf(phrase) >= 0;
+};
