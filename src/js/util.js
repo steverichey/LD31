@@ -1,4 +1,4 @@
-/*global window, stage, document*/
+/*global window, stage, document, requestAnimationFrame*/
 
 var Game = Game || {};
 
@@ -6,6 +6,23 @@ Game.width  = 0;
 Game.height = 0;
 Game.children = [];
 Game.stage = null;
+Game.paused = false;
+Game.animatemethod = null;
+
+Game.pause = function() {
+  if (!Game.paused) {
+    Game.paused = true;
+  }
+};
+
+Game.unpause = function() {
+  if (Game.paused) {
+    Game.paused = false;
+    if (Game.animatemethod !== null) {
+      requestAnimationFrame(Game.animatemethod);
+    }
+  }
+};
 
 Game.updateSize = function() {
   Game.width  = 1024;
@@ -13,8 +30,9 @@ Game.updateSize = function() {
 };
 
 Game.screenshot = function() {
-  var canvas = document.getElementById('gamecanvas');
-  return canvas.toDataURL("image/png");
+  var canvas = document.querySelector('canvas');
+  var image = canvas.toDataURL('image/jpeg', 0.8).slice(0);
+  return image;
 };
 
 /**
