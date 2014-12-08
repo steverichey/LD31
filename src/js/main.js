@@ -1,4 +1,4 @@
-/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy, Flake, Snowdio, gameOptions*/
+/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy, Flake, Snowdio, gameOptions, contains*/
 
 var renderer, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
 
