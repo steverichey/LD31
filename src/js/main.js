@@ -48,8 +48,8 @@ function init() {
   
   // Setting up buttons
   
-  var leftchoice = 0;
-  var rightchoice = 0;
+  var leftchoice = -1;
+  var rightchoice = -1;
   var leftoptions = [];
   
   // parses options.js for button graphic names
