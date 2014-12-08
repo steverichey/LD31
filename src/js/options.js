@@ -85,7 +85,8 @@ var gameOptions = [
         asset  : 'shadow-gold' },
       { button : 'btn-shadow-green',
         asset  : 'shadow-green' },
-      { button : 'btn-shadow-silver' }
+      { button : 'btn-shadow-silver',
+        asset  : 'shadow-silver' ß}
     ]
   },
   {
