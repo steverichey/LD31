@@ -83,6 +83,8 @@ function init() {
     snowguy.changeLashes('empty');
     snowguy.changeMouth('snowman-mouth');
     snowguy.changeNose('snowman-nose');
+    snowguy.changeBlush('empty');
+    snowguy.changeCane('empty');
   };
   
   rightbuttons.get(1).onclicked = function() {
@@ -108,6 +110,8 @@ function init() {
       snowguy.changeNose(assetname);
     } else if (contains(buttonname, 'blush')) {
       snowguy.changeBlush(assetname);
+    } else if (contains(buttonname, 'cane')) {
+      snowguy.changeCane(assetname);
     }
   }
   
