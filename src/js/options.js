@@ -78,7 +78,15 @@ var gameOptions = [
       { button : 'btn-lashes-sparkle',
         asset  : 'sparkle-lashes' },
       { button : 'btn-lashes',
-        asset  : 'lashes-01' }
+        asset  : 'lashes-01' },
+      { button : '',
+        asset  : 'shadow-blue' },
+      { button : '',
+        asset  : 'shadow-gold' },
+      { button : '',
+        asset  : 'shadow-green' },
+      { button : '',
+        asset  : 'shadow-silver' }
     ]
   },
   {
