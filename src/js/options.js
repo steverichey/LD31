@@ -55,10 +55,32 @@ var gameOptions = [
   },
   {
     button  : 'btn-makeup',
-    options : []
+    options : [
+      { button : 'btn-makeup-blush-blue',
+        asset  : 'blush-blue' },
+      { button : 'btn-makeup-blush-coral',
+        asset  : 'blush-coral' },
+      { button : 'btn-makeup-blush-green',
+        asset  : 'blush-green' },
+      { button : 'btn-makeup-blush-pink',
+        asset  : 'blush-pink' }
+    ]
   },
   {
     button  : 'btn-accessories',
-    options : []
+    options : [
+      { button : '',
+        asset  : 'cane' },
+      { button : '',
+        asset  : 'glasses-cateye' },
+      { button : '',
+        asset  : 'glasses-wayfairer' },
+      { button : '',
+        asset  : 'glasses-nerd' },
+      { button : '',
+        asset  : 'sparkle-lashes' },
+      { button : '',
+        asset  : '' }
+    ]
   }
 ];
