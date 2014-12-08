@@ -20,6 +20,9 @@ function init() {
     Snowdio.get('teru').looped = true; 
     Snowdio.play('teru'); 
   });
+  Snowdio.load('./snd/select.ogg', function() {
+    Snowdio.get('select').setVolume(0.25);
+  });
   
   // the BG
   
@@ -123,6 +126,8 @@ function init() {
   }
   
   leftbuttons.setAllOnClicked(function(index) {
+    Snowdio.play('select');
+    
     if (index === leftchoice) {
       if (centerbuttons !== null) {
         centerbuttons.hide(function() {
