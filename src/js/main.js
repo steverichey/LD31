@@ -1,8 +1,8 @@
-/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy, Flake, Snowdio, gameOptions, contains*/
+/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy, Flake, Snowdio, gameOptions, contains, XMLHttpRequest*/
 
 var renderer, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
 
-var NUMBER_OF_FLAKES = 50;
+var NUMBER_OF_FLAKES = 100;
 var flakes = [];
 
 function init() {
@@ -11,7 +11,6 @@ function init() {
   var i = 0;
   Game.updateSize();
   renderer = new PIXI.WebGLRenderer(Game.width, Game.height);
-  renderer.view.setAttribute('id', 'gamecanvas');
   document.body.appendChild(renderer.view);
   
   Game.stage = new PIXI.Stage(0x000000, true);
@@ -26,6 +25,17 @@ function init() {
   
   var bg = new GameSprite(512, 384, 'background');
   Game.add(bg);
+  
+  bg.interactive = true;
+  bg.mousedown = bg.touchstart = function(data) {
+    if (centerbuttons !== null) {
+        centerbuttons.hide(function() {
+          centerbuttons = null;
+        });
+    }
+    
+    leftbuttons.clearTint();
+  };
   
   // the snowflake layer
   
@@ -58,7 +68,7 @@ function init() {
   }
   
   leftbuttons   = new GameButtons(leftoptions, GameButtons.Options.LEFT_SIDE);
-  rightbuttons  = new GameButtons(['btn-clear', 'btn-camera', 'btn-sound'], GameButtons.Options.RIGHT_SIDE);
+  rightbuttons  = new GameButtons(['btn-clear', 'btn-sound'], GameButtons.Options.RIGHT_SIDE);
   centerbuttons = null;
   var changeType = SnowGuy.Part.Eyes;
   
@@ -73,10 +83,6 @@ function init() {
   };
   
   rightbuttons.get(1).onclicked = function() {
-    // take a pic
-  };
-  
-  rightbuttons.get(2).onclicked = function() {
     // mute sounds
     Snowdio.toggleMuted();
   };
@@ -117,7 +123,17 @@ function init() {
   }
   
   leftbuttons.setAllOnClicked(function(index) {
-    if (index === leftchoice) return;
+    if (index === leftchoice) {
+      if (centerbuttons !== null) {
+        centerbuttons.hide(function() {
+          centerbuttons = null;
+        });
+        
+        leftchoice = -1;
+      }
+      
+      return;
+    }
     
     if (centerbuttons !== null) {
       centerbuttons.hide(function() {
@@ -134,10 +150,22 @@ function init() {
   var menucenter = new GameSprite(512, Game.height * 2, 'bg-menu-center');
   Game.add(menucenter);
   
+  // core game loop
+  
   function animate() {
+    if (Game.paused) {
+      return;
+    }
+    
+    // update the tweening library
+    
     TWEEN.update();
     
+    // move the snowguy's eyes
+    
     snowguy.lookAt(mouse.x, mouse.y);
+    
+    // spawn new flakes from time to time
     
     if (flakes.length < NUMBER_OF_FLAKES && Game.random.chance(2)) {
       var newflake = new Flake();
@@ -145,9 +173,13 @@ function init() {
       Game.add(newflake, snowflakelayer);
     }
     
+    // update all children
+    
     for (i = 0; i < Game.children.length; i++) {
       Game.children[i].update();
     }
+    
+    // oooh this is bad, this is really bad
     
     if (centerbuttons !== null) {
       menucenter.y = (centerbuttons.get(0).y + centerbuttons.getlast().y) / 2;
@@ -164,6 +196,7 @@ function init() {
     mouse.y = data.global.y;
   };
   
+  Game.animatemethod = animate;
   requestAnimationFrame(animate);
 }
 
