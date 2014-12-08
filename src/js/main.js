@@ -53,7 +53,7 @@ function init() {
   var leftoptions = [];
   
   // parses options.js for button graphic names
-  for (var i = 0; i < gameOptions.length; i++) {
+  for (i = 0; i < gameOptions.length; i++) {
     leftoptions.push(gameOptions[i].button);
   }
   
