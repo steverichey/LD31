@@ -135,11 +135,13 @@ GameButtons.prototype.setAllOnClicked = function(callback) {
 GameButtons.prototype.onButtonClick = function(index) {
   var self = this.parentButtonGroup;
   
-  self.clearTint();
-  
-  var tint = index === self.lastchoice ? 0xFFFFFF : 0xAAAAFF;
-  
-  self.buttonsArray[index].tint = tint;
+  if (!this.type === GameButtons.Options.CENTER_BOTTOM) {
+    self.clearTint();
+
+    var tint = index === self.lastchoice ? 0xFFFFFF : 0xAAAAFF;
+
+    self.buttonsArray[index].tint = tint;
+  }
   
   if (typeof self.buttonCallbacks[index] === 'function') {
     self.buttonCallbacks[index](index);
