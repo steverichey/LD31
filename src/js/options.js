@@ -26,7 +26,28 @@ var gameOptions = [
   },
   {
     button  : 'btn-mouth',
-    options : []
+    options : [
+      { button : 'btn-lips-clear',
+        asset  : 'snowman-mouth' },
+      { button : 'btn-lips-blue',
+        asset  : 'lips-blue' },
+      { button : 'btn-lips-coral',
+        asset  : 'lips-coral' },
+      { button : 'btn-lips-frost',
+        asset  : 'lips-frost' },
+      { button : 'btn-lips-icicles',
+        asset  : 'lips-icicles' },
+      { button : 'btn-lips-pebbles-black',
+        asset  : 'lips-pebbles-black' },
+      { button : 'btn-lips-pebbles-brown',
+        asset  : 'lips-pebbles-brown' },
+      { button : 'btn-lips-pink',
+        asset  : 'lips-pink' },
+      { button : 'btn-lips-red',
+        asset  : 'lips-red' },
+      { button : 'btn-lips-violet',
+        asset  : 'lips-violet' }
+    ]
   },
   {
     button  : 'btn-hair',
