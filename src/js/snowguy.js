@@ -10,6 +10,9 @@ var SnowGuy = function() {
   this.head = new GameSprite(512, 340, 'snowman-head');
   Game.add(this.head);
   
+  this.blush = new GameSprite(512, this.head.y + 40, 'empty');
+  Game.add(this.blush);
+  
   this.eyes = new GameSprite(512, this.head.y, 'snowman-eyes');
   Game.add(this.eyes);
   
@@ -87,6 +90,10 @@ SnowGuy.prototype.changeHair = function(asset) {
 
 SnowGuy.prototype.changeLashes = function(asset) {
   this.lashes.changeTexture(asset);
+};
+
+SnowGuy.prototype.changeBlush = function(asset) {
+  this.blush.changeTexture(asset);
 };
 
 SnowGuy.prototype.lookAt = function(x, y) {
