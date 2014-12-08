@@ -44,7 +44,7 @@ var SnowGuy = function() {
   this.nose = new GameSprite(512, this.eyes.y + 30, 'snowman-nose');
   Game.add(this.nose);
   
-  this.mouth = new GameSprite(512, this.eyes.y + 70, 'snowman-mouth');
+  this.mouth = new GameSprite(512, this.eyes.y + 80, 'snowman-mouth');
   Game.add(this.mouth);
   
   this.lashes = new GameSprite(512, this.eyes.y - 50);
