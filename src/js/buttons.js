@@ -9,10 +9,11 @@ var GameButtons = function(assetArray, type) {
   this.blocked = true;
   var duration = 1000;
   this.block(duration);
+  this.lastchoice = -1;
   
   var initialX    = 0;
   var finalX      = 0;
-  var deltaY      = (Game.height - 150) / amount;
+  var deltaY      = 128;
   var initialY    = 200;
   var deltaX      = 0;
   var finalDeltaX = 0;
@@ -134,14 +135,20 @@ GameButtons.prototype.setAllOnClicked = function(callback) {
 GameButtons.prototype.onButtonClick = function(index) {
   var self = this.parentButtonGroup;
   
-  self.buttonsArray.forEach(function(obj, ind) {
-    obj.tint = 0xFFFFFF;
-  });
+  self.clearTint();
   
-  self.buttonsArray[index].tint = 0xAAAAFF;
+  var tint = index === self.lastchoice ? 0xFFFFFF : 0xAAAAFF;
+  
+  self.buttonsArray[index].tint = tint;
   
   if (typeof self.buttonCallbacks[index] === 'function') {
     self.buttonCallbacks[index](index);
+  }
+  
+  if (index === self.lastchoice) {
+    self.lastchoice = -1;
+  } else {
+    self.lastchoice = index;
   }
 };
 
@@ -151,6 +158,23 @@ GameButtons.prototype.block = function(duration) {
   setTimeout(function() {
     self.blocked = false;
   }, duration);
+};
+
+GameButtons.prototype.clearTint = function() {
+  //var self = this.parentButtonGroup;
+  this.buttonsArray.forEach(function(obj, ind) {
+    obj.tint = 0xFFFFFF;
+  });
+};
+
+GameButtons.prototype.hasTint = function() {
+  this.buttonsArray.forEach(function(obj, ind) {
+    if (obj.tint !== 0xFFFFFF) {
+      return true;
+    }
+  });
+  
+  return false;
 };
 
 GameButtons.Options = {
