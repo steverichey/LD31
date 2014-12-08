@@ -8,6 +8,7 @@ var flakes = [];
 function init() {
   // game and rendering setup stuff
   
+  var i = 0;
   Game.updateSize();
   renderer = new PIXI.WebGLRenderer(Game.width, Game.height);
   renderer.view.setAttribute('id', 'gamecanvas');
