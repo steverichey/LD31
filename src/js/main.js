@@ -112,8 +112,6 @@ function init() {
     // get out of here if there are no options
     if (options.length === 0) return;
     
-    console.log(options);
-    
     centerbuttons = new GameButtons(options, GameButtons.Options.CENTER_BOTTOM);
     centerbuttons.setAllOnClicked(centerCallback);
   }
