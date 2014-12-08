@@ -26,10 +26,10 @@ var GameButtons = function(assetArray, type) {
         break;
       case GameButtons.Options.CENTER_BOTTOM:
         var columns = Math.ceil(amount / 2);
-        deltaX      = 128;
+        deltaX      = 96;
         initialX    = 512 - (columns - 1) * (deltaX / 2);
-        finalY      = Game.height - 256;
-        finalDeltaY = 128;
+        finalY      = Game.height - 196;
+        finalDeltaY = 96;
         initialY    = Game.height + 64;
         finalX      = initialX;
         finalDeltaX = deltaX;
