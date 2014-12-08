@@ -1,4 +1,4 @@
-# Snowman Beauty Shop
+# Snowman Beauty Shop [![Build Status](https://travis-ci.org/steverichey/LD31.svg)](https://travis-ci.org/steverichey/LD31)
 
 ![](./screenshot.png)
 
