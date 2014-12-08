@@ -34,10 +34,11 @@ module.exports = function(grunt) {
     copy: {
         dist: {
             expand: true,
-            flatten: true,
-            filter: 'isFile',
-            src: ['src/img/**', 'src/snd/**'],
-            dest: 'dist/'
+            cwd: 'src/',
+            src: ['img/**', 'snd/**'],
+            dest: 'dist/',
+            flatten: false,
+            filter: 'isFile'
         }
     },
     embed: {
