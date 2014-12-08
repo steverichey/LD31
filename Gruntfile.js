@@ -5,7 +5,19 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
         dist: {
-            src: 'src/js/*.js',
+            src: [
+              'src/js/pixi.dev.js',
+              'src/js/tween.js',
+              'src/js/snowdio.js',
+              'src/js/util.js',
+              'src/js/sprite.js',
+              'src/js/button.js',
+              'src/js/buttons.js',
+              'src/js/flake.js',
+              'src/js/snowguy.js',
+              'src/js/options.js',
+              'src/js/main.js'
+            ],
             dest: 'temp/concat.js'
         }
     },
