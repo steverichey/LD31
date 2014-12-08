@@ -21,7 +21,7 @@ var SnowGuy = function() {
   this.MIN_EYE_Y = this.eyes.y - 10;
   this.MAX_EYE_Y = this.eyes.y + 10;
   
-  this.hair = new GameSprite(512, this.head.y - 100, 'empty');
+  this.hair = new GameSprite(512, this.head.y - 50, 'empty');
   Game.add(this.hair);
   
   var blinktween = null;
