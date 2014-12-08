@@ -63,24 +63,26 @@ var gameOptions = [
       { button : 'btn-makeup-blush-green',
         asset  : 'blush-green' },
       { button : 'btn-makeup-blush-pink',
-        asset  : 'blush-pink' }
+        asset  : 'blush-pink' },
+      { button : 'btn-lashes-sparkle',
+        asset  : 'sparkle-lashes' },
+      { button : 'btn-lashes',
+        asset  : 'lashes-01' }
     ]
   },
   {
     button  : 'btn-accessories',
     options : [
-      { button : '',
+      { button : 'btn-cane',
         asset  : 'cane' },
-      { button : '',
-        asset  : 'glasses-cateye' },
-      { button : '',
+      { button : 'btn-glasses-cat',
+        asset  : 'glasses-cat' },
+      { button : 'btn-glasses-wayfarer',
         asset  : 'glasses-wayfairer' },
-      { button : '',
-        asset  : 'glasses-nerd' },
-      { button : '',
-        asset  : 'sparkle-lashes' },
-      { button : '',
-        asset  : '' }
+      { button : 'btn-glasses-rayban',
+        asset  : 'glasses-rayban' },
+      { button : 'btn-glasses-nerd',
+        asset  : 'glasses-nerd' }
     ]
   }
 ];
