@@ -175,5 +175,4 @@ Snownd.prototype.setVolume = function(volume) {
   if (volume < 0) volume = 0;
   // set volume
   this.gainNode.gain.value = volume;
-  console.log('volume set to ' + this.gainNode.gain.value);
 };
