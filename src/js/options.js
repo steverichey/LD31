@@ -59,7 +59,9 @@ var gameOptions = [
       { button : 'btn-hair-bob-orange',
         asset  : 'hair-bob-orange' },
       { button : 'btn-hair-bob-purple',
-        asset  : 'hair-bob-purple' }
+        asset  : 'hair-bob-purple' },
+      { button : 'btn-hair-spikes-blonde',
+        asset  : 'hair-spikes-blonde' }
     ]
   },
   {
