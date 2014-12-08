@@ -141,6 +141,7 @@ var Snownd = function(buffer, url) {
   this.playing = false;
   this.looped = false;
   this.gainNode = null;
+  this.volume = 1;
 };
 
 Snownd.prototype.constructor = Snownd;
@@ -149,13 +150,13 @@ Snownd.prototype.play = function() {
   var source = Snowdio.getContext().createBufferSource();
   this.gainNode = Snowdio.getContext().createGain();
   source.buffer = this.buffer;
-  //source.connect(Snowdio.getContext().destination);
   source.connect(this.gainNode);
   this.gainNode.connect(Snowdio.getContext().destination);
   source.onended = function() {
     this.playing = false;
   };
   source.loop = this.looped;
+  this.gainNode.gain.value = this.volume;
   source.start(0);
   this.playing = true;
 };
@@ -174,5 +175,5 @@ Snownd.prototype.setVolume = function(volume) {
   if (volume > 1) volume = 1;
   if (volume < 0) volume = 0;
   // set volume
-  this.gainNode.gain.value = volume;
+  this.volume = volume;
 };
