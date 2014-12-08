@@ -113,6 +113,10 @@ function init() {
   });
   
   var i = 0;
+  // the center button container
+  
+  var menucenter = new GameSprite(512, Game.height * 2, 'bg-menu-center');
+  Game.add(menucenter);
   
   function animate() {
     TWEEN.update();
@@ -127,6 +131,12 @@ function init() {
     
     for (i = 0; i < Game.children.length; i++) {
       Game.children[i].update();
+    }
+    
+    if (centerbuttons !== null) {
+      menucenter.y = (centerbuttons.get(0).y + centerbuttons.getlast().y) / 2;
+    } else {
+      menucenter.y = Game.height * 2;
     }
     
     renderer.render(Game.stage);
