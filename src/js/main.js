@@ -103,7 +103,7 @@ function init() {
   function showCenter(index) {
     var options = [];
     
-    for (var i = 0; i < gameOptions[index].options.length; i++) {
+    for (i = 0; i < gameOptions[index].options.length; i++) {
       options.push(gameOptions[index].options[i].button);
     }
     
