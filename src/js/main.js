@@ -81,6 +81,25 @@ function init() {
     Snowdio.toggleMuted();
   };
   
+  function centerCallback(index) {
+    var buttonname = gameOptions[leftchoice].options[index].button;
+    var assetname  = gameOptions[leftchoice].options[index].asset;
+    
+    if (contains(buttonname, 'eye')) {
+      snowguy.changeEyes(assetname);
+    } else if (contains(buttonname, 'lip')) {
+      snowguy.changeMouth(assetname);
+    } else if (contains(buttonname, 'glasses')) {
+      snowguy.changeGlasses(assetname);
+    } else if (contains(buttonname, 'hair')) {
+      snowguy.changeHair(assetname);
+    } else if (contains(buttonname, 'lash')) {
+      snowguy.changeLashes(assetname);
+    } else if (contains(buttonname, 'nose')) {
+      snowguy.changeNose(assetname);
+    }
+  }
+  
   function showCenter(index) {
     var options = [];
     
