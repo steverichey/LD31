@@ -107,6 +107,11 @@ function init() {
       options.push(gameOptions[index].options[i].button);
     }
     
+    leftchoice = index;
+    
+    // get out of here if there are no options
+    if (options.length === 0) return;
+    
     console.log(options);
     
     centerbuttons = new GameButtons(options, GameButtons.Options.CENTER_BOTTOM);
