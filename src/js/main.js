@@ -119,26 +119,18 @@ function init() {
   }
   
   leftbuttons.setAllOnClicked(function(index) {
-    switch (index) {
-      case 0: // eyes
-        
-        break;
-      case 1: // mouth
-        
-        break;
-      case 2: // hair
-        
-        break;
-      case 3: // makeup
-        
-        break;
-      case 4: // accessories
-        
-        break;
+    if (index === leftchoice) return;
+    
+    if (centerbuttons !== null) {
+      centerbuttons.hide(function() {
+        centerbuttons = null;
+        showCenter(index);
+      });
+    } else {
+      showCenter(index);
     }
   });
   
-  var i = 0;
   // the center button container
   
   var menucenter = new GameSprite(512, Game.height * 2, 'bg-menu-center');
