@@ -50,7 +50,7 @@ var SnowGuy = function() {
   this.mouth = new GameSprite(512, this.eyes.y + 80, 'snowman-mouth');
   Game.add(this.mouth);
   
-  this.lashes = new GameSprite(512, this.eyes.y - 50);
+  this.lashes = new GameSprite(512, this.eyes.y - 5);
   Game.add(this.lashes);
   
   this.glasses = new GameSprite(512, this.eyes.y + 10);
@@ -61,6 +61,9 @@ var SnowGuy = function() {
   
   this.rarm = new GameSprite(512, this.tum.y, 'snowman-arm-right');
   Game.add(this.rarm);
+  
+  this.cane = new GameSprite(this.larm.x - 256, this.larm.y, 'empty');
+  Game.add(this.cane);
   
   this.larm.anchor.set(1.4, 0.5);
   this.rarm.anchor.set(-0.4, 0.5);
@@ -94,6 +97,10 @@ SnowGuy.prototype.changeLashes = function(asset) {
 
 SnowGuy.prototype.changeBlush = function(asset) {
   this.blush.changeTexture(asset);
+};
+
+SnowGuy.prototype.changeCane = function(asset) {
+  this.cane.changeTexture(asset);
 };
 
 SnowGuy.prototype.lookAt = function(x, y) {
