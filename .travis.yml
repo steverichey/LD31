@@ -5,3 +5,4 @@ script: sh deploy.sh
 env:
  global:
  - GH_REF: github.com/steverichey/LD31.git
+ - secure: NJnXB6SzRJFHZhFpG2xSmQ0eR0otPzuaE5g4qejgkH3aO0/HaskZgs+uu/Ryfx7TvekFJww8M6yKhuV8abMqh9IBCvPNZqgVAcGqgyPftGTpfeh0marW2XdCxrdQn2I8GUz97ZsbAttRwsgLUYLY7+eqAu4CVTZNRwle8dQ0Vfg=
