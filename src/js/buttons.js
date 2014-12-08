@@ -111,6 +111,12 @@ GameButtons.prototype.hide = function(callback) {
     .start();
   
   setTimeout(function() {
+    for (i = 0; i < self.buttonsArray.length; i++) {
+      Game.remove(self.buttonsArray[i]);
+    }
+    
+    self.buttonsArray.splice(0, self.buttonsArray.length);
+    
     if (typeof callback !== 'undefined') {
       callback();
     }
