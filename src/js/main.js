@@ -115,6 +115,7 @@ function init() {
     console.log(options);
     
     centerbuttons = new GameButtons(options, GameButtons.Options.CENTER_BOTTOM);
+    centerbuttons.setAllOnClicked(centerCallback);
   }
   
   leftbuttons.setAllOnClicked(function(index) {
