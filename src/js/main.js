@@ -126,6 +126,8 @@ function init() {
       snowguy.changeBlush(assetname);
     } else if (contains(buttonname, 'cane')) {
       snowguy.changeCane(assetname);
+    } else if (contains(buttonname, 'shadow')) {
+      snowguy.changeShadow(assetname);
     }
     
     Snowdio.play('omg_' + Game.random.intpad(1, omg.length, 2));
