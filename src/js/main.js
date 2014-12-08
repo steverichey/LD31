@@ -16,13 +16,27 @@ function init() {
   Game.stage = new PIXI.Stage(0x000000, true);
   
   Snowdio.init();
+  
   Snowdio.load('./snd/teru.ogg', function() { 
     Snowdio.get('teru').looped = true; 
     Snowdio.play('teru'); 
   });
+  
   Snowdio.load('./snd/select.ogg', function() {
     Snowdio.get('select').setVolume(0.25);
   });
+  
+  // loop through sounds and load
+  
+  var omg = [];
+  
+  for (i = 1; i < 24; i++) {
+    omg.push('omg_' + pad(i, 2));
+  }
+  
+  for (i = 0; i < omg.length; i++) {
+    Snowdio.load('./snd/' + omg[i] + '.ogg');
+  }
   
   // the BG
   
@@ -113,6 +127,8 @@ function init() {
     } else if (contains(buttonname, 'cane')) {
       snowguy.changeCane(assetname);
     }
+    
+    Snowdio.play('omg_' + Game.random.intpad(1, omg.length, 2));
   }
   
   function showCenter(index) {

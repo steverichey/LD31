@@ -86,6 +86,7 @@ Game.remove = function(child) {
 Game.random = {};
 
 Game.random.float = function(min, max) {
+  if (min == max) return min;
   min = min || 0;
   max = max || 1;
   return Math.random() * (max - min) + min;
@@ -103,6 +104,26 @@ Game.random.chance = function(likelihood) {
   return (likelihood > Game.random.float(0, 100));
 };
 
+Game.random.intpad = function(min, max, digits) {
+  var inte = Game.random.int(min, max).toString();
+  
+  while (inte.length < digits) {
+    inte = '0' + inte;
+  }
+  
+  return inte;
+};
+
 var contains = function(string, phrase) {
   return string.indexOf(phrase) >= 0;
+};
+
+var pad = function(num, amount) {
+  var ints = num + '';
+  
+  while (ints.length < amount) {
+    ints = '0' + ints;
+  }
+  
+  return ints;
 };
