@@ -106,6 +106,8 @@ function init() {
       snowguy.changeLashes(assetname);
     } else if (contains(buttonname, 'nose')) {
       snowguy.changeNose(assetname);
+    } else if (contains(buttonname, 'blush')) {
+      snowguy.changeBlush(assetname);
     }
   }
   
