@@ -72,6 +72,10 @@ GameButtons.prototype.get = function(index) {
   return this.buttonsArray[index];
 };
 
+GameButtons.prototype.getlast = function() {
+  return this.buttonsArray[this.buttonsArray.length - 1];
+};
+
 GameButtons.prototype.hide = function(callback) {
   var finalX      = 0;
   var finalY      = 0;
