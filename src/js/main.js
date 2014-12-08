@@ -17,7 +17,7 @@ function init() {
   Game.stage = new PIXI.Stage(0x000000, true);
   
   Snowdio.init();
-  Snowdio.load('./snd/teru.wav', function() { 
+  Snowdio.load('./snd/teru.ogg', function() { 
     Snowdio.get('teru').looped = true; 
     Snowdio.play('teru'); 
   });
