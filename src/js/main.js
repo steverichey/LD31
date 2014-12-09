@@ -153,7 +153,11 @@ function init() {
   }
   
   leftbuttons.setAllOnClicked(function(index) {
-    Snowdio.play('select');
+    try {
+      Snowdio.play('select');
+    } catch (e) {
+      console.log('failed to play select');
+    }
     
     if (index === leftchoice) {
       if (centerbuttons !== null) {
