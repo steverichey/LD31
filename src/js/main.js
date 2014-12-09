@@ -1,4 +1,4 @@
-/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy, Flake, Snowdio, gameOptions, contains, XMLHttpRequest*/
+/*global PIXI, TWEEN, document, window, console, requestAnimationFrame, GameSprite, GameButton, GameButtons, Game, setTimeout, SnowGuy, Flake, Snowdio, gameOptions, contains, pad, XMLHttpRequest*/
 
 var renderer, snowguy, leftbuttons, rightbuttons, centerbuttons, mouse = {x:0, y:0};
 
@@ -16,13 +16,16 @@ function init() {
   Game.stage = new PIXI.Stage(0x000000, true);
   
   Snowdio.init();
+
+  var agent = navigator.userAgent.toLowerCase();
+  var ext = contains(agent, 'safari') && !contains(agent, 'chrome') ? '.m4a' : '';
   
-  Snowdio.load('./snd/teru.ogg', function() { 
+  Snowdio.load('./snd/teru.ogg' + ext, function() { 
     Snowdio.get('teru').looped = true; 
     Snowdio.play('teru'); 
   });
   
-  Snowdio.load('./snd/select.ogg', function() {
+  Snowdio.load('./snd/select.ogg' + ext, function() {
     Snowdio.get('select').setVolume(0.25);
   });
   
@@ -35,7 +38,7 @@ function init() {
   }
   
   for (i = 0; i < omg.length; i++) {
-    Snowdio.load('./snd/' + omg[i] + '.ogg');
+    Snowdio.load('./snd/' + omg[i] + '.ogg' + ext);
   }
   
   // the BG
