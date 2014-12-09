@@ -2,7 +2,7 @@
 
 ![](./screenshot.png)
 
-Our submission for Ludum Dare 31. Made with the talented and beautiful @kristingish.
+Our submission for Ludum Dare 31. Made with the talented and beautiful @kristingish. It's off the chain!
 
 # Notes
 
