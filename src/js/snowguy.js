@@ -10,7 +10,7 @@ var SnowGuy = function() {
   this.head = new GameSprite(512, 340, 'snowman-head');
   Game.add(this.head);
   
-  this.shadow = new GameSprite(512, this.head.y, 'empty');
+  this.shadow = new GameSprite(512, this.head.y -10, 'empty');
   Game.add(this.shadow);
   
   this.blush = new GameSprite(512, this.head.y + 40, 'empty');

@@ -79,13 +79,13 @@ var gameOptions = [
         asset  : 'sparkle-lashes' },
       { button : 'btn-lashes',
         asset  : 'lashes-01' },
-      { button : '',
+      { button : 'btn-shadow-blue',
         asset  : 'shadow-blue' },
-      { button : '',
+      { button : 'btn-shadow-gold',
         asset  : 'shadow-gold' },
-      { button : '',
+      { button : 'btn-shadow-green',
         asset  : 'shadow-green' },
-      { button : '',
+      { button : 'btn-shadow-silver',
         asset  : 'shadow-silver' }
     ]
   },
